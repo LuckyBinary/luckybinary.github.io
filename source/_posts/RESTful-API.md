@@ -31,6 +31,10 @@ Representational State Transfer
 
 无状态
 
+{% note primary %}
+JWT和Session的选择，JWT是无状态的
+{% endnote %}
+
 - 所有用户回话信息都保存在客户端
 - 每次请求必须包括所有信息，不能依赖上下文信息
 - 服务端不用保存会话信息，提升了简单性、可靠性、可见性
@@ -138,3 +142,18 @@ Representational State Transfer
 - 增、改：当前增加或修改的数据
 - 查：查询的数据
 - 删：返回204
+
+#### 字段过滤
+
+`GET https://localhost:3000/user/1?fields=name;age`;
+
+#### 嵌套结构
+
+- 查看关注列表
+  `GET https://localhost:3000/:id/folowing`
+
+- 添加关注
+  `PUT https://localhost:3000/flowing/:id`
+
+- 回复文章评论
+  `POST https://localhost:3000/questions/:questionId/answers/:answerId/comments`

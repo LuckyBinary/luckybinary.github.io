@@ -158,7 +158,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/bg/post_banner.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      751 字
+      850 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      9
        分钟
     </span>
   
@@ -248,6 +248,10 @@
 <li>前端专注用户界面，提升了可移植性</li>
 </ul>
 <p>无状态</p>
+<div class="note note-primary">
+            <p>JWT和Session的选择，JWT是无状态的</p>
+          </div>
+
 <ul>
 <li>所有用户回话信息都保存在客户端</li>
 <li>每次请求必须包括所有信息，不能依赖上下文信息</li>
@@ -339,6 +343,20 @@
 <li>文档</li>
 <li>超媒体</li>
 </ul>
+<h4 id="增删改查应该返回什么响应"><a href="#增删改查应该返回什么响应" class="headerlink" title="增删改查应该返回什么响应"></a>增删改查应该返回什么响应</h4><ul>
+<li>增、改：当前增加或修改的数据</li>
+<li>查：查询的数据</li>
+<li>删：返回204</li>
+</ul>
+<h4 id="字段过滤"><a href="#字段过滤" class="headerlink" title="字段过滤"></a>字段过滤</h4><p><code>GET https://localhost:3000/user/1?fields=name;age</code>;</p>
+<h4 id="嵌套结构"><a href="#嵌套结构" class="headerlink" title="嵌套结构"></a>嵌套结构</h4><ul>
+<li><p>查看关注列表<br><code>GET https://localhost:3000/:id/folowing</code></p>
+</li>
+<li><p>添加关注<br><code>PUT https://localhost:3000/flowing/:id</code></p>
+</li>
+<li><p>回复文章评论<br><code>POST https://localhost:3000/questions/:questionId/answers/:answerId/comments</code></p>
+</li>
+</ul>
 
             </div>
             <hr>
@@ -369,6 +387,12 @@
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2020/03/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="hidden-mobile">计算机网络</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
