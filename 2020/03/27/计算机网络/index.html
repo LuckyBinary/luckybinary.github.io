@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      16.2k 字
+      16.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      171
+      172
        分钟
     </span>
   
@@ -254,7 +254,7 @@
 <h4 id="带宽"><a href="#带宽" class="headerlink" title="带宽"></a>带宽</h4><p>在计算机网络中，网络带宽是指在单位时间（一般指的是 1 秒钟）内能传输的数据量，比如说你家的电信网络是 100 兆比特，意思是，一秒内最大的传输速率是 100 兆比特。</p>
 <h4 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h4><p>吞吐量表示在单位时间内通过某个网络（或信道、接口）的数据量。</p>
 <div class="note note-primary">
-            <p>由此可知带宽是说的是最大值速率，吞吐量说的是某时刻速率。但吞吐量不能超过最大速率</p>
+            <p>由此可知带宽说的是最大值速率，吞吐量说的是某时刻速率。但吞吐量不能超过最大速率</p>
           </div>
 
 <h4 id="时延"><a href="#时延" class="headerlink" title="时延"></a>时延</h4><p>时延是指数据（报文/分组/比特流）从网络（或链路）的一端传送到另一端所需的时间。单位是 s。 时延分以下几种：</p>
@@ -267,6 +267,7 @@
 <div class="note note-primary">
             <p>总时延 = 排队时延 + 处理时延 + 发送时延 + 传播时延</p>
           </div>
+
 <h4 id="往返时间（RTT）"><a href="#往返时间（RTT）" class="headerlink" title="往返时间（RTT）"></a>往返时间（RTT）</h4><p>在计算机网络中，往返时间也是一个重要的性能指标，它表示从发送方发送数据开始，到发送方收到来自接收方的确认（接受方收到数据后便立即发送确认）总共经历的时间。</p>
 <h4 id="时延带宽积"><a href="#时延带宽积" class="headerlink" title="时延带宽积"></a>时延带宽积</h4><p>是指传播时延乘以带宽。</p>
 <h3 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h3><p><img src="/img/notes/2020-3-27_1_32.png" srcset="/img/loading.gif" lazyload alt="计算机网络体系结构"></p>
@@ -378,57 +379,60 @@
 <p><img src="/img/notes/2020-3-27_1_3.png" srcset="/img/loading.gif" lazyload alt="交换机交换表"></p>
 <h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p>网络层主要任务是将<code>分组</code>从一台主机移动到另一台主机，从而提供了<code>主机到主机的通信服务</code>和各种形式的<code>进程到进程的通信</code>。</p>
 <p>分组：大多数计算机网络都不能连续地传送任意长的数据，所以实际上网络系统把数据分割成小块，然后逐块地发动，这种小块就称作分组。</p>
-<h3 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h3><h4 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h4><p>当<code>主机H1</code>要向另一<code>主机H2</code>发送数据（报文）时，首先将数据划分成若干个等长的分组，然后将这些分组一个接一个地发往里与<code>H1</code>相联的<code>路由A</code>,当<code>A</code>接到分组后，先放入缓冲区，再按一定的路由算法确定该分组下一步将发注哪个结点，如此一个结点一个结点传递，直到最终目的<code>H2</code>。</p>
+<h3 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h3><p>当<code>主机H1</code>要向另一<code>主机H2</code>发送数据（报文）时，首先将数据划分成若干个等长的分组，然后将这些分组一个接一个地发往里与<code>H1</code>相联的<code>路由A</code>,当<code>A</code>接到分组后，先放入缓冲区，再按一定的路由算法确定该分组下一步将发注哪个结点，如此一个结点一个结点传递，直到最终目的<code>H2</code>。</p>
 <p>这一段话比较啰嗦，简单来说分组就是<code>分数据块</code>，同时还具有<code>无需建立连接</code>，存储转发（存储转发是指以太网交换机的控制器先将输入端口到来的数据报缓存起来，先检查数据报是否正确，并过滤掉冲突包错误），<code>动态分配路线</code>（交换设备会根据网络状况选择不同的路线，比如路由器）的优点。</p>
-<h4 id="数据报"><a href="#数据报" class="headerlink" title="数据报"></a>数据报</h4><p>数据报是通过网络传输的<code>数据的基本单元</code>，包含一个<code>报头（header）</code>和<code>数据</code>本身。说白了，就是带地址的数据，比如你的写了一句微信”你好”，这串文字本上加上源地址，目的地址，就是数据报。</p>
-<h4 id="IP-数据报格式"><a href="#IP-数据报格式" class="headerlink" title="IP 数据报格式"></a>IP 数据报格式</h4><p><img src="/img/notes/2020-3-27_1_5.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<h3 id="数据报"><a href="#数据报" class="headerlink" title="数据报"></a>数据报</h3><p>数据报是通过网络传输的<code>数据的基本单元</code>，包含一个<code>报头（header）</code>和<code>数据</code>本身。说白了，就是带地址的数据，比如你的写了一句微信”你好”，这串文字本上加上源地址，目的地址，就是数据报。</p>
+<h3 id="IP-数据报格式"><a href="#IP-数据报格式" class="headerlink" title="IP 数据报格式"></a>IP 数据报格式</h3><p><img src="/img/notes/2020-3-27_1_5.png" srcset="/img/loading.gif" lazyload alt="IP数据报格式"></p>
 <ul>
-<li>首部的固定部分是<code>20字节</code>，共 <code>20 * 8 = 160</code> 比特（1 字节=8 比特）</li>
-<li><code>0 - 4</code> 比特是版本号，版本有 ipv4/ipv6</li>
-<li>首部长度，<code>单位是 4B</code>，最小为 5， 为什么是 5 呢？因为首部至少 20 字节，所以 4 * 5 就是 20 字节</li>
-<li>总长度是，<code>首部+数据</code></li>
-<li>生存时间是<code>TTL</code>，它告诉网络，数据报在网络中的时间是否太长而应被丢弃。每经过一个路由器减一，变成 0 就丢弃</li>
-<li>协议是指数据部分用的什么协议，我们只需要知道<code>TCP</code>协议用<code>6</code>表示，<code>UDP</code>协议用<code>17</code>表示即可。</li>
-<li>首部校验和占<code>16位</code>。这个字段只检验数据报的首部，但不包括数据部分。</li>
-<li>目的地址和源地址都是<code>IP地址</code>，目的地址是通过<code>DNS</code>查询得来的。</li>
+<li>首部的<strong>固定部分</strong>是<code>20字节</code>，共 <code>20 * 8 = 160</code> 比特（1 字节=8 比特）。</li>
+<li><strong>版本</strong>：占4位，有 4（IPv4）和 6（IPv6）两个值。</li>
+<li><strong>首部长度</strong>：<code>单位是 4B</code>，最小为 5，因为首部至少 20 字节，所以 4 * 5 就是 20 字节。</li>
+<li><strong>区分服务</strong> ：用来获得更好的服务，一般情况下不使用。</li>
+<li><strong>总长度</strong>：首部长度+数据部分长度。</li>
+<li><strong>标识</strong>： 在数据报长度过长从而发生分片的情况下，相同数据报的不同分片具有相同的标识符。</li>
+<li><strong>片偏移</strong> ：和标识符一起，用于发生分片的情况。片偏移的单位为 8 字节。</li>
+<li><strong>生存时间</strong>：<code>TTL</code>，它告诉网络，数据报在网络中的时间是否太长而应被丢弃。以路由器跳数为单位，每经过一个路由器减一，变成 0 就丢弃。</li>
+<li><strong>协议</strong>：是指数据部分用的什么协议，我们只需要知道<code>TCP</code>协议用<code>6</code>表示，<code>UDP</code>协议用<code>17</code>表示即可。</li>
+<li><strong>首部校验和</strong>：这个字段只检验数据报的首部，不包括数据部分，因为数据报每经过一个路由器，都要重新计算检验和，因此检验和不包含数据部分可以减少计算的工作量。</li>
+<li><strong>目的地址</strong>和<strong>源地址</strong>都是<code>IP地址</code>，目的地址是通过<code>DNS</code>查询得来的。</li>
 </ul>
-<h4 id="IP-分片"><a href="#IP-分片" class="headerlink" title="IP 分片"></a>IP 分片</h4><p>为什么要分片呢：链路层数据帧封装的数据大小是有限制的，以太网的 MTU（MTU 是指一种通信协议的某一层上面所能通过的最大数据报大小）是 1500 字节。</p>
-<p>接下来我们就看看在 IP 数据报上，哪些字段标识了分片的数据呢？</p>
-<p><img src="/img/notes/2020-3-27_1_7.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<h3 id="IP-分片"><a href="#IP-分片" class="headerlink" title="IP 分片"></a>IP 分片</h3><p>为什么需要分片：链路层数据帧封装的数据大小是有限制的，以太网的 MTU（MTU 是指一种通信协议的某一层上面所能通过的最大数据报大小）是 1500 字节。</p>
+<p>在 IP 数据报上，标识了分片的数据的字段：</p>
+<p><img src="/img/notes/2020-3-27_1_7.png" srcset="/img/loading.gif" lazyload alt="IP数据报格式"></p>
 <ul>
-<li>标识是在<code>同一数据的分片</code>时相同。</li>
-<li>标志占 3 位，但只有两位有意义，第一个位叫<code>MF(More Fragment)</code>，MF=1 即表示后面“还有分片”的数据报。MF=0 表示这已是若干数据报片中的最后一个。</li>
-<li>标志字段中间的一位记为<code>DF(Don’t Fragment)</code>，意思是“不能分片”。只有当 DF=0 时才允许分片。</li>
-<li>片偏移，较长的分组在分片后，某片在原分组中的相对位置。</li>
+<li><strong>标识</strong></li>
+<li><strong>标志</strong>：占 3 位，但只有两位有意义，第一个位叫<code>MF(More Fragment)</code>，MF=1 即表示后面“还有分片”的数据报。MF=0 表示这已是若干数据报片中的最后一个。中间的一位记为<code>DF(Don’t Fragment)</code>，意思是“不能分片”。只有当 DF=0 时才允许分片。</li>
+<li><strong>片偏移</strong>：较长的分组在分片后，某片在原分组中的相对位置。</li>
 </ul>
-<h4 id="IP-地址分类"><a href="#IP-地址分类" class="headerlink" title="IP 地址分类"></a>IP 地址分类</h4><p><img src="/img/notes/2020-3-27_1_6.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p><img src="/img/notes/2020-3-27_1_34.png" srcset="/img/loading.gif" lazyload alt="数据报的分片举例"></p>
+<h3 id="IP-地址分类"><a href="#IP-地址分类" class="headerlink" title="IP 地址分类"></a>IP 地址分类</h3><p><img src="/img/notes/2020-3-27_1_6.png" srcset="/img/loading.gif" lazyload alt="IP地址分类"></p>
 <p>其中<code>127.0.0.0~127.255.255.255</code>用于环回测试。</p>
 <p>有一部分叫<code>私有IP地址</code>，是不能拿到网络上跟别的计算机通信的。只能是局域网自己内部用。比如说有：</p>
-<p><img src="/img/notes/2020-3-27_1_8.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p><img src="/img/notes/2020-3-27_1_8.png" srcset="/img/loading.gif" lazyload alt="私有IP地址"></p>
 <p>可以看到，C 类私有地址就是<code>192.168</code>网段，每个局域网都可以有这些私有 IP。</p>
 <p>还有一些<code>特殊地址</code>，需要了解：</p>
-<p><img src="/img/notes/2020-3-27_1_9.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p><img src="/img/notes/2020-3-27_1_9.png" srcset="/img/loading.gif" lazyload alt="特殊地址"></p>
 <p>注意，这里的全 1 是指，IPV4 地址由 4 个字节组成，每一个字节是 8 位，8 位全一就是十进制的 255, 即<code>255.255.255.255</code>。</p>
 <ul>
 <li>第一行，全一，代表是<code>255.255.255.255</code>，在本网络的目的地址写这个的话，就会内网广播。</li>
 <li>第二行，网络号特定值，主机号是全 0，比如，<code>192.169.10.1</code>，这是 c 类网络，所以网络号是<code>192.169.10</code>，主机号是 1，当主机号全 0 时，就是 0，表示<code>192.169.10.0</code>这个网段。</li>
-<li>第三行，还是<code>192.169.10.1</code>这个 c 类地址，主机号都是 1，也就是 8 个 1，代表 255，所以 192.169.10.255 表示本网段的广播地址。</li>
-<li>第四行，大家最熟悉不过了，127 作为网络号，主机号非全 0 或 1，比如说<code>127.0.0.1</code>代表本机，称为环回地址。</li>
+<li>第三行，还是<code>192.169.10.1</code>这个 c 类地址，主机号都是 1，也就是 8 个 1，代表 255，所以 <code>192.169.10.255</code>表示本网段的广播地址。</li>
+<li>第四行，127 作为网络号，主机号非全 0 或 1，比如说<code>127.0.0.1</code>代表本机，称为环回地址。</li>
 </ul>
-<p>IPV4 中，<code>0.0.0.0</code>地址被用于表示一个无效的，未知的或者不可用的目标。在服务器中，<code>0.0.0.0</code>指的是本机上的所有 IPV4 地址，如果一个主机有两个 IP 地址，<code>192.168.1.1</code>和<code>10.1.2.1</code>，并且该主机上的一个服务监听的地址是<code>0.0.0.0</code>,那么通过两个 IP 地址都能够访问该服务。</p>
-<h4 id="网络地址转换-NAT"><a href="#网络地址转换-NAT" class="headerlink" title="网络地址转换(NAT)"></a>网络地址转换(NAT)</h4><p>在 IP 地址分类里面，我们知道私有 IP 地址是不能跟外网交互的，在小公司大多数计算机的地址都是<code>192.168</code>网段，都是私有 IP 地址，它是怎么跟外网交互数据的呢，这里就引出来一个知识点叫<code>网络地址转换NAT</code>。</p>
-<p><img src="/img/notes/2020-3-27_1_10.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p>IPV4 中，<code>0.0.0.0</code>地址被用于表示一个无效的，未知的或者不可用的目标。在服务器中，<code>0.0.0.0</code>指的是本机上的所有 IPV4 地址，如果一个主机有两个 IP 地址，<code>192.168.1.1</code>和<code>10.1.2.1</code>，并且该主机上的一个服务监听的地址是<code>0.0.0.0</code>，那么通过两个 IP 地址都能够访问该服务。</p>
+<h3 id="网络地址转换-NAT"><a href="#网络地址转换-NAT" class="headerlink" title="网络地址转换(NAT)"></a>网络地址转换(NAT)</h3><p>在 IP 地址分类里面，我们知道私有 IP 地址是不能跟外网交互的，在小公司大多数计算机的地址都是<code>192.168</code>网段，都是私有 IP 地址，它是怎么跟外网交互数据的呢，这里就引出来一个知识点叫<code>网络地址转换NAT</code>。</p>
+<p><img src="/img/notes/2020-3-27_1_10.png" srcset="/img/loading.gif" lazyload alt="网络地址转换NAT"></p>
 <p>如上图所示，<code>192.168.0.3</code>，<code>192.168.0.4</code>都是私有网段上的，它们无法跟外网通信，这个时候由于路由器安装了 NAT 软件，就可以将自己的 IP 地址，即路由器的 IP 地址<code>172.38.1.5</code>作为内网的代理，去访问外网，外网返回来的数据，经过路由转换，转换成内网的<code>192.168</code>网段的私有地址。</p>
-<h4 id="子网划分和子网掩码"><a href="#子网划分和子网掩码" class="headerlink" title="子网划分和子网掩码"></a>子网划分和子网掩码</h4><p>划分子网的方式是从网络的主机号借用若干位作为子网号，主机号也就相应减少了同样的位数。</p>
-<p><img src="/img/notes/2020-3-27_1_10.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<h3 id="子网划分和子网掩码"><a href="#子网划分和子网掩码" class="headerlink" title="子网划分和子网掩码"></a>子网划分和子网掩码</h3><p>划分子网的方式是从网络的主机号借用若干位作为子网号，主机号也就相应减少了同样的位数。</p>
+<p><img src="/img/notes/2020-3-27_1_11.png" srcset="/img/loading.gif" lazyload alt="子网划分"></p>
 <p>当没有划分子网时，IP 地址是两级结构。划分子网后 IP 地址变成了三级结构。划分子网只是把 IP 地址的主机号这部分进行再划分，而不改变 IP 地址原来的网络号。</p>
 <p>我们将<code>145.13.0.0</code>这个网段划分了三个子网，其中一个是<code>145.13.3.0</code>，一个是<code>145.13.21.0</code>，问题来了，如果一个数据报来了，数据报要交给的 IP 地址是<code>145.13.3.10</code>，我们怎么知道给哪个子网呢？</p>
 <p>方法是将数据报的目的地址，跟子网的子网掩码相与预算（二进制与预算规则是，1 跟 1 得 1，其它为 0），也就是目的地址<code>145.13.3.10</code>跟子网<code>145.13.3.0</code>的子网掩码<code>255.255.255.0</code>的与预算，得到的结果是<code>145.13.3.0</code>，所以发送到的子网就是<code>145.13.3.0</code>。</p>
-<h3 id="ARP-协议"><a href="#ARP-协议" class="headerlink" title="ARP 协议"></a>ARP 协议</h3><p>以太网的帧的格式：</p>
-<p><img src="/img/notes/2020-3-27_1_2.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<h3 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="地址解析协议ARP"></a>地址解析协议ARP</h3><p>以太网的帧的格式：</p>
+<p><img src="/img/notes/2020-3-27_1_2.png" srcset="/img/loading.gif" lazyload alt="以太网的帧格式"></p>
 <p>上图有一个<code>源地址</code>和<code>目的地址</code>，这两个地址都是指的<code>MAC地址</code>，<code>MAC地址</code>是什么呢？简单说来就是两台相邻的路由器 A 和 B，A 怎么把数据传给 B 呢，它总要知道 B 的物理地址吧，物理地址就像门牌号一样，我要知道你住在哪里，才能把数据送过去吧？首先你肯定知道自己的<code>MAC地址</code>是多少，因为在网卡上有，问题在于，别人的<code>MAC地址</code>是多少？<code>ARP协议</code>就是来帮你找<code>MAC地址</code>的。</p>
-<h4 id="ARP-协议的过程"><a href="#ARP-协议的过程" class="headerlink" title="ARP 协议的过程"></a>ARP 协议的过程</h4><p><img src="/img/notes/2020-3-27_1_12.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
-<ul>
+<h4 id="ARP协议的过程"><a href="#ARP协议的过程" class="headerlink" title="ARP协议的过程"></a>ARP协议的过程</h4><p><img src="/img/notes/2020-3-27_1_12.png" srcset="/img/loading.gif" lazyload alt="ARP协议的过程"></p>
+<ol>
 <li>每台主机都会在自己的<code>ARP缓冲区</code>中建立一个<code>ARP列表</code>，以表示 <code>IP地址</code>和<code>MAC地址</code>的映射关系</li>
 <li>当源主机需要将一个数据报要发送到目的主机时，会首先检查自己<code>ARP列表</code>中是否存在该<code>IP地址</code>对应的 <code>MAC地址</code></li>
 <li>如果有，就直接将数据报发送到这个<code>MAC地址</code>；如果没有，就向本地网段发起一个 <code>ARP</code>请求的广播报，查询此目的主机对应的<code>MAC地址</code></li>
@@ -437,29 +441,26 @@
 <li>如果<code>ARP表</code>中已经存在该<code>IP</code>的信息，则将其覆盖，然后给源主机发送一个 <code>ARP响应数据报</code>，告诉对方自己是它需要查找的<code>MAC地址</code></li>
 <li>源主机收到这个<code>ARP响应数据报</code>后，将得到的目的主机的<code>IP地址</code>和<code>MAC地址</code>添加到自己的<code>ARP列表</code>中，并利用此信息开始数据的传输</li>
 <li>如果源主机一直没有收到<code>ARP响应数据报</code>，表示<code>ARP查询失败</code>。</li>
-</ul>
-<h3 id="DHCP-协议"><a href="#DHCP-协议" class="headerlink" title="DHCP 协议"></a>DHCP 协议</h3><blockquote>
-<p>DHCP（动态主机配置协议）是一个局域网的网络协议。指的是由服务器控制一段 lP 地址范围，客户机登录服务器时就可以自动获得服务器分配的 IP 地址和子网掩码。说白了，当你接入局域网的时候，自动由这个 DHCP 服务器给你分配 IP，windows 用户可能知道网卡配置里面，由自动获取 IP 的功能，如果路由器提供 DHCP 服务，你就会自动获取随机分配的 IP。</p>
-</blockquote>
-<p>路由器里可以开启这个服务。</p>
+</ol>
+<h3 id="DHCP-协议"><a href="#DHCP-协议" class="headerlink" title="DHCP 协议"></a>DHCP 协议</h3><p>DHCP（动态主机配置协议）是一个局域网的网络协议。指的是由服务器控制一段 lP 地址范围，客户机登录服务器时就可以自动获得服务器分配的 IP 地址和子网掩码。当接入局域网的时候，自动由这个 DHCP 服务器分配 IP，windows 用户可能知道网卡配置里面，有自动获取 IP 的功能，如果路由器提供 DHCP 服务，就会自动获取随机分配的 IP。路由器里可以开启这个服务。</p>
 <p>大致工作过程：</p>
-<p><img src="/img/notes/2020-3-27_1_13.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
-<h3 id="ICMP-协议"><a href="#ICMP-协议" class="headerlink" title="ICMP 协议"></a>ICMP 协议</h3><p>一个新搭建好的网络，往往需要先进行一个简单的测试，来验证网络是否畅通；但是 IP 协议并不提供可靠传输。如果丢包了，IP 协议并不能通知传输层是否丢包以及丢包的原因。</p>
+<p><img src="/img/notes/2020-3-27_1_13.png" srcset="/img/loading.gif" lazyload alt="DHCP数据发送过程"></p>
+<h3 id="网际控制报文协议ICMP"><a href="#网际控制报文协议ICMP" class="headerlink" title="网际控制报文协议ICMP"></a>网际控制报文协议ICMP</h3><p>一个新搭建好的网络，往往需要先进行一个简单的测试，来验证网络是否畅通；但是 IP 协议并不提供可靠传输。如果丢包了，IP 协议并不能通知传输层是否丢包以及丢包的原因。</p>
 <p>所以我们就需要一种协议来完成这样的功能–<code>ICMP协议</code>。</p>
-<h4 id="ICMP-协议主要功能"><a href="#ICMP-协议主要功能" class="headerlink" title="ICMP 协议主要功能"></a>ICMP 协议主要功能</h4><p>1、确认 IP 报是否成功到达目标地址</p>
-<p>2、通知在发送过程中 IP 报被丢弃的原因，举一个例子：</p>
-<p><img src="/img/notes/2020-3-27_1_14.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<h4 id="ICMP-协议主要功能"><a href="#ICMP-协议主要功能" class="headerlink" title="ICMP 协议主要功能"></a>ICMP 协议主要功能</h4><ul>
+<li>确认 IP 报是否成功到达目标地址</li>
+<li>通知在发送过程中 IP 报被丢弃的原因，举一个例子：</li>
+</ul>
+<p><img src="/img/notes/2020-3-27_1_14.png" srcset="/img/loading.gif" lazyload alt="ICMP应答报文"></p>
 <p>主机 H2 收到主机 H1 的一个<code>UDP报</code>，结果 H2 发现这个报里的端口没有被监听，这时候就回复给 H2 一个<code>ICMP应答报文</code>，意思是这个<code>UDP数据报</code>无法交给应用进程，只能丢弃了。</p>
 <p>以下是 4 种常见的 ICMP 差错报告报文：</p>
-<p><img src="/img/notes/2020-3-27_1_15.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p><img src="/img/notes/2020-3-27_1_15.png" srcset="/img/loading.gif" lazyload alt="ICMP 差错报告报文"></p>
 <p>我们常用的<code>PING</code>命令借助<code>ICMP协议</code>，探测主机是否能找到目的主机。</p>
-<h3 id="网络设备路由器简介"><a href="#网络设备路由器简介" class="headerlink" title="网络设备路由器简介"></a>网络设备路由器简介</h3><blockquote>
-<p>路由器是一种具有多个输入端口和多个输出端口的专用计算机，其任务是转发和分组。</p>
-</blockquote>
+<h3 id="网络设备路由器简介"><a href="#网络设备路由器简介" class="headerlink" title="网络设备路由器简介"></a>网络设备路由器简介</h3><p>路由器是一种具有多个输入端口和多个输出端口的专用计算机，其任务是转发和分组。</p>
 <p>如下图所示，分别有转发和分组功能的说明。</p>
-<p><img src="/img/notes/2020-3-27_1_16.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p><img src="/img/notes/2020-3-27_1_16.png" srcset="/img/loading.gif" lazyload alt="路由器功能"></p>
 <p>接着，我们看一下路由器输入端口做了哪些事情：</p>
-<p><img src="/img/notes/2020-3-27_1_17.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p><img src="/img/notes/2020-3-27_1_17.png" srcset="/img/loading.gif" lazyload alt="路由器输入端口"></p>
 <ul>
 <li><p>首先，物理层是傻瓜层，传输<code>比特流</code>，我们把物理层的比特流还原成<code>数据链路层</code>的<code>数据帧</code>，然后把<code>数据链路层</code>的<code>数据报</code>脱去，成为<code>网络层数据报</code>，交给路由器。这时候就要判断一下这个数据报是什么类型的了。</p>
 </li>
@@ -467,7 +468,7 @@
 </li>
 </ul>
 <p>最后我们看一下路由器输出端口做了哪些事情：</p>
-<p><img src="/img/notes/2020-3-27_1_18.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
+<p><img src="/img/notes/2020-3-27_1_18.png" srcset="/img/loading.gif" lazyload alt="路由器输出端口"></p>
 <p>从上图可以看到，输出端口是做的输入端口的逆过程，将网络层的数据报转换为链路层的数据帧，最后转为物理层的比特流。</p>
 <blockquote>
 <p>输入和输出端口需要注意的是，它们都有一个缓冲队列，比如输入数据的速度太快，输出数据速度慢，为了平衡输入输出速度，就用缓冲队列把数据缓冲下来，一个一个慢慢的处理，但缓冲队列也有限度，超出这个限度，缓冲队列容纳不下，包就会被丢掉。</p>
@@ -749,7 +750,7 @@
 </blockquote>
 <p> 当文档加载过程中遇到 js 文件，html 文档会挂起渲染（加载解析渲染同步）的线程，不仅要等待文档中 js 文件加载完毕，还要等待解析执行完毕，才可以恢复 html 文档的渲染线程。因为 JS 有可能会修改 DOM，最为经典的 document.write，这意味着，在 JS 执行完成前，后续所有资源的下载可能是没有必要的，这是 js 阻塞后续资源下载的根本原因。所以我明平时的代码中，js 是放在 html 文档末尾的。</p>
 <p> JS 的解析是由浏览器中的 JS 解析引擎完成的。JS 是单线程运行，也就是说，在同一个时间内只能做一件事，所有的任务都需要排队，前一个任务结束，后一个任务才能开始。但是又存在某些任务比较耗时，如 IO 读写等，所以需要一种机制可以先执行排在后面的任务，这就是：同步任务(synchronous)和异步任务(asynchronous)。</p>
-<p> ​JS 的执行机制就可以看做是一个主线程加上一个任务队列(task queue)。同步任务就是放在主线程上执行的任务，异步任务是放在任务队列中的任务。所有的同步任务在主线程上执行，形成一个执行栈;异步任务有了运行结果就会在任务队列中放置一个事件；脚本运行时先依次运行执行栈，然后会从任务队列里提取事件，运行任务队列中的任务，这个过程是不断重复的，所以又叫做事件循环(Event loop)。</p>
+<p> JS 的执行机制就可以看做是一个主线程加上一个任务队列(task queue)。同步任务就是放在主线程上执行的任务，异步任务是放在任务队列中的任务。所有的同步任务在主线程上执行，形成一个执行栈;异步任务有了运行结果就会在任务队列中放置一个事件；脚本运行时先依次运行执行栈，然后会从任务队列里提取事件，运行任务队列中的任务，这个过程是不断重复的，所以又叫做事件循环(Event loop)。</p>
 </li>
 <li><p>连接结束<br> ​<br> 现在的页面为了优化请求的耗时，默认都会开启持久连接（keep-alive），那么一个 TCP 连接确切关闭的时机，是这个 tab 标签页关闭的时候。这个关闭的过程就是著名的四次挥手。关闭是一个全双工的过程，发包的顺序的不一定的。一般来说是客户端主动发起的关闭。</p>
 </li>
